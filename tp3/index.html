@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Etapa 7</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script>
+    function adicionar_submit(event) {
+      console.log('houve um submit');
+      var pessoa = {
+        nome: document.forms.cadastro.elements.nome.value,
+        idade: document.forms.cadastro.elements.idade.value,
+        email: document.forms.cadastro.elements.email.value,
+        telefone: document.forms.cadastro.elements.telefone.value
+      };
+
+      var html = '<div class="panel panel-primary">';
+      html = html + '<div class="panel-heading">' + pessoa.nome + '&nbsp;<span class="badge">'+ pessoa.idade + '</span>';
+      html += '<span class="pull-right btn btn-danger btn-xs">';
+      html += '<span class="glyphicon glyphicon-trash" onclick="remover(event)"></span></span></div>';
+      html += '<div class="panel-body">';
+      html += 'E-mail: <a href="mailto:' + pessoa.email + '">' + pessoa.email +'</a><br/>' +
+        'Telefone: <a href="tel:' + pessoa.telefone +'">' + pessoa.telefone +'</a>' +
+        '</div></div>';
+
+      var $cadastros = document.getElementById('cadastros');
+      $cadastros.innerHTML += html;
+
+      event.preventDefault();
+    }
+
+    function adicionar_click(event) {
+      console.log('houve um click');
+    }
+
+    function remover(event) {
+      console.log('remover');
+      event.target.parentNode.parentNode.parentNode.remove();
+    }
+
+  </script>
+</head>
+<body>
+<div class="container">
+  <h1>Exemplos</h1>
+  <form action="#" name="cadastro" class="pure-form pure-form-stacked" onsubmit="adicionar_submit(event)">
+    <fieldset>
+      <legend>Criando Cadastros</legend>
+      <div class="form-group col-md-6">
+        <label for="nome_id">Nome:</label>
+        <input name="nome" id="nome_id" type="text" placeholder="Nome" class="form-control" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="idade_id">Idade:</label>
+        <input name="idade" id="idade_id" type="number" placeholder="Idade" class="form-control" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="email_id">E-Mail:</label>
+        <input name="email" id="email_id" type="email" placeholder="E-Mail" class="form-control" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="telefone_id">Telefone:</label>
+        <input type="tel" name="telefone" id="telefone_id" placeholder="Telefone" class="form-control" required>
+      </div>
+      <button class="btn btn-info btn-block" onclick="adicionar_click(event)">Cadastrar</button>
+    </fieldset>
+  </form>
+  <h3>Cadastros</h3>
+  <div id="cadastros">
+
+  </div>
+
+</div>
+</body>
+</html>
